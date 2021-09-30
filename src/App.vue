@@ -1,15 +1,18 @@
 <template>
+  <Header />
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import Header from "./components/Header/index.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     HelloWorld,
+    Header,
   },
 });
 </script>
@@ -18,8 +21,7 @@ export default defineComponent({
 :root {
   --green: #2d4a22;
   --red: #e52e4d;
-  --blue: #5429cc;
-  --blue-light: #49aa26;
+  --green-light: #49aa26;
   --text-title: #363f5f;
   --text-body: #969cb3;
   --input-background: #e7e9ee;
