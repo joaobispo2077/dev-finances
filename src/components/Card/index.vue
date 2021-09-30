@@ -1,5 +1,5 @@
 <template>
-  <article class="card">
+  <article :class="`card ${highlighted && 'highlight-background'}`">
     <header class="card-header">
       <h2 class="card-title">{{ title }}</h2>
       <img :src="chargedLogo" class="card-logo" />
@@ -33,6 +33,10 @@ export default defineComponent({
       required: true,
       type: Number,
     },
+    highlighted: {
+      default: false,
+      type: Boolean,
+    },
   },
   setup(props) {
     const { amount, logo } = toRefs(props);
@@ -47,13 +51,27 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .card {
+  background: var(--shape);
+  padding: 1.5rem 2rem;
+  border-radius: 0.25rem;
+  color: var(--text-title);
   .card-header {
-    .card-title {
-    }
-    .card-logo {
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .card-amount {
+    display: block;
+
+    margin-top: 1rem;
+
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  &.highlight-background {
+    background: var(--green-light);
+    color: #fff;
   }
 }
 </style>
