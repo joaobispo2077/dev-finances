@@ -1,17 +1,17 @@
 <template>
   <Header />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <Dashboard />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import Dashboard from "./components/Dashboard/index.vue";
 import Header from "./components/Header/index.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld,
+    Dashboard,
     Header,
   },
 });
