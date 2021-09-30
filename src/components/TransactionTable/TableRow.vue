@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, computed, PropType, reactive } from "vue";
 
-type Transaction = {
+export type Transaction = {
   id: string;
   title: string;
   amount: number;
@@ -29,9 +29,10 @@ export default defineComponent({
       props.transaction
     );
 
-    const amountFormatted = computed(() => amount);
-    const createdAtFormatted = computed(() => createdAt);
     const amountPrefix = computed(() => (type === "income" ? "+" : "-"));
+    const amountFormatted = computed(() => amount);
+
+    const createdAtFormatted = computed(() => createdAt);
 
     return {
       amountPrefix,
