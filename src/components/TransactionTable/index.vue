@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
-    <table>
+  <div class="table-container">
+    <table class="transaction-table">
       <thead>
         <tr>
-          <th>Título</th>
-          <th>Preço</th>
-          <th>Categoria</th>
-          <th>Data</th>
+          <th class="table-head">Título</th>
+          <th class="table-head">Preço</th>
+          <th class="table-head">Categoria</th>
+          <th class="table-head">Data</th>
         </tr>
       </thead>
       <tbody>
@@ -53,4 +53,24 @@ export default defineComponent({
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.table-container {
+  margin-top: 4rem;
+
+  overflow: scroll;
+  .transaction-table {
+    width: 100%;
+    border-spacing: 0 0.5rem;
+
+    .table-head {
+      color: var(--text-body);
+
+      padding: 1rem 2rem;
+
+      text-align: left;
+      font-weight: 400;
+      line-height: 1.5rem;
+    }
+  }
+}
+</style>

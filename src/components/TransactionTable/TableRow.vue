@@ -1,9 +1,11 @@
 <template>
-  <tr>
-    <td>{{ transaction.title }}</td>
-    <td :class="transaction.type">{{ amountPrefix }} {{ amountFormatted }}</td>
-    <td>{{ transaction.category }}</td>
-    <td>{{ transaction.createdAt }}</td>
+  <tr class="container-row">
+    <td class="table-cell">{{ transaction.title }}</td>
+    <td class="table-cell" :class="transaction.type">
+      {{ amountPrefix }} {{ amountFormatted }}
+    </td>
+    <td class="table-cell">{{ transaction.category }}</td>
+    <td class="table-cell">{{ transaction.createdAt }}</td>
   </tr>
 </template>
 
@@ -44,8 +46,21 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.income {
-}
-.outcome {
+.table-cell {
+  padding: 1rem 2rem;
+  border: 0;
+  background: var(--shape);
+  border-radius: 0.25rem;
+  color: var(--text-body);
+
+  &:first-child {
+    color: var(--text-title);
+  }
+  &.income {
+    color: var(--green-light);
+  }
+  &.outcome {
+    color: var(--red);
+  }
 }
 </style>
