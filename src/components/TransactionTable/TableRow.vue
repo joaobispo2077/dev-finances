@@ -4,7 +4,6 @@
     <td class="table-cell" :class="transaction.type">
       {{ amountPrefix }}{{ amountFormatted }}
     </td>
-    <td class="table-cell">{{ transaction.category }}</td>
     <td class="table-cell">{{ createdAtFormatted }}</td>
   </tr>
 </template>
@@ -17,7 +16,6 @@ export type Transaction = {
   id: string;
   title: string;
   amount: number;
-  category: string;
   createdAt: string;
   type: "income" | "outcome";
 };

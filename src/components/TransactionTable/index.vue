@@ -5,7 +5,6 @@
         <tr>
           <th class="table-head">Título</th>
           <th class="table-head">Preço</th>
-          <th class="table-head">Categoria</th>
           <th class="table-head">Data</th>
         </tr>
       </thead>
@@ -41,7 +40,6 @@ export default defineComponent({
         id: String(key),
         title: `Lorem ipsum dolor sit amet consectetur`,
         amount: Math.floor(Math.random() * 100),
-        category: `Lorem ipsum dolor`,
         createdAt: String(new Date()),
         type: Math.floor(Math.random() * 2) === 0 ? "income" : "outcome",
       })
@@ -58,6 +56,7 @@ export default defineComponent({
   margin-top: 4rem;
 
   overflow: scroll;
+  overflow-y: hidden;
   .transaction-table {
     width: 100%;
     border-spacing: 0 0.5rem;
