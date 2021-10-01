@@ -2,14 +2,15 @@
   <tr class="container-row">
     <td class="table-cell">{{ transaction.title }}</td>
     <td class="table-cell" :class="transaction.type">
-      {{ amountPrefix }} {{ amountFormatted }}
+      {{ amountPrefix }}{{ amountFormatted }}
     </td>
     <td class="table-cell">{{ transaction.category }}</td>
-    <td class="table-cell">{{ transaction.createdAt }}</td>
+    <td class="table-cell">{{ createdAtFormatted }}</td>
   </tr>
 </template>
 
 <script lang="ts">
+import { formatCurrency, formatDate } from "@/utils/parser";
 import { defineComponent, computed, PropType, reactive } from "vue";
 
 export type Transaction = {
@@ -32,9 +33,9 @@ export default defineComponent({
     );
 
     const amountPrefix = computed(() => (type === "income" ? "+" : "-"));
-    const amountFormatted = computed(() => amount);
+    const amountFormatted = computed(() => formatCurrency(amount));
 
-    const createdAtFormatted = computed(() => createdAt);
+    const createdAtFormatted = computed(() => formatDate(createdAt));
 
     return {
       amountPrefix,
