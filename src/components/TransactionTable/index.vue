@@ -1,5 +1,7 @@
 <template>
   <div class="table-container">
+    <button class="btn-new-transaction" type="button">+ Nova transação</button>
+
     <table class="transaction-table">
       <thead>
         <tr>
@@ -57,6 +59,15 @@ export default defineComponent({
 
   overflow: scroll;
   overflow-y: hidden;
+
+  .btn-new-transaction {
+    font-size: 1rem;
+
+    color: var(--green-light);
+    background: transparent;
+    border: 0;
+  }
+
   .transaction-table {
     width: 100%;
     border-spacing: 0 0.5rem;
