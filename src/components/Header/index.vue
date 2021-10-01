@@ -1,9 +1,7 @@
 <template>
   <header>
     <div class="header-wrapper">
-      <h1>dev.finances$</h1>
-
-      <button>Nova transação</button>
+      <img src="@/assets/logo.svg" />
     </div>
   </header>
 </template>
@@ -23,31 +21,12 @@ header {
   .header-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     max-width: 1140px;
     margin: 0 auto;
 
     padding: 2rem 1rem 12rem;
-
-    button {
-      border: 0;
-      background: var(--green-light);
-      color: var(--shape);
-
-      font-size: 1rem;
-
-      padding: 0 2rem;
-      height: 3rem;
-
-      border-radius: 0.25rem;
-
-      transition: filter 0.2s;
-
-      &:hover {
-        filter: brightness(90%);
-      }
-    }
   }
 }
 </style>
