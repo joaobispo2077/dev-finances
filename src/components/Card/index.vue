@@ -9,14 +9,8 @@
 </template>
 
 <script lang="ts">
+import { formatCurrency } from "@/utils/parser";
 import { defineComponent, computed, toRefs } from "vue";
-
-function formatAmount(amount: string | number) {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(Number(amount));
-}
 
 export default defineComponent({
   name: "CardList",
@@ -41,7 +35,7 @@ export default defineComponent({
   setup(props) {
     const { amount, logo } = toRefs(props);
 
-    const amountFormatted = computed(() => formatAmount(amount.value));
+    const amountFormatted = computed(() => formatCurrency(amount.value));
     const chargedLogo = computed(() => require(`../../assets/${logo.value}`));
 
     return { amountFormatted, chargedLogo };
