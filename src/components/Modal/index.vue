@@ -24,46 +24,46 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Modal",
-  setup() {
-    const showModal = ref(false);
-
-    return {
-      showModal,
-    };
-  },
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .modal-mask {
+  background: rgba(0, 0, 0, 0.5);
+
   position: fixed;
-  z-index: 9998;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+  width: 100%;
+  background: var(--background);
+  padding: 3rem;
+  position: relative;
+  border-radius: 0.25rem;
+  max-width: 32rem;
+
+  @media (min-width: 768px) {
+    max-width: 36rem;
+    padding: 3rem 6rem;
+  }
 }
 
 .modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
 .modal-header h3 {
@@ -82,7 +82,7 @@ export default defineComponent({
 
 .modal-enter-active,
 .modal-leave-active {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .modal-enter-from,
