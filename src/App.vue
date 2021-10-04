@@ -1,18 +1,38 @@
 <template>
   <Header />
   <Dashboard />
+  <div id="app">
+    <button id="show-modal" @click="showModal = true">Show Modal</button>
+    <!-- use the modal component, pass in the prop -->
+    <transition name="modal">
+      <Modal v-if="showModal" @close="showModal = false">
+        <template v-slot:header>
+          <h3>custom header</h3>
+        </template>
+      </Modal>
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import Dashboard from "./components/Dashboard/index.vue";
 import Header from "./components/Header/index.vue";
+import Modal from "./components/Modal/index.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     Dashboard,
     Header,
+    Modal,
+  },
+  setup() {
+    const showModal = ref(false);
+
+    return {
+      showModal,
+    };
   },
 });
 </script>
