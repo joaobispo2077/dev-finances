@@ -1,7 +1,11 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-wrapper">
-      <div class="modal-container">
+  <div
+    class="modal-mask"
+    @click.self="$emit('close')"
+    @keydown.esc="$emit('close')"
+  >
+    <div class="modal-wrapper" @keydown.esc="$emit('close')">
+      <div class="modal-container" @keydown.esc="$emit('close')">
         <div class="modal-header">
           <slot name="header"> default header </slot>
         </div>
@@ -48,6 +52,7 @@ export default defineComponent({
 }
 
 .modal-wrapper {
+  z-index: 20;
   width: 100%;
   background: var(--background);
   padding: 3rem;
