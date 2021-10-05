@@ -34,18 +34,18 @@ export default defineComponent({
   name: "Modal",
   methods: {},
   setup(_, { emit }) {
-    function onEscapeKeyUp(event: KeyboardEvent) {
+    function onEscapeKeyDown(event: KeyboardEvent) {
       if (String(event.key).toLowerCase() === "escape") {
         emit("close");
       }
     }
 
     onMounted(() => {
-      window.removeEventListener("keypress", onEscapeKeyUp);
+      window.removeEventListener("keydown", onEscapeKeyDown);
     });
 
     onBeforeUnmount(() => {
-      window.addEventListener("keypress", onEscapeKeyUp);
+      window.addEventListener("keydown", onEscapeKeyDown);
     });
   },
 });
