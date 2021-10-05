@@ -5,7 +5,37 @@
         <button @click="closeModal" class="btn-modal-close">×</button>
       </template>
       <template v-slot:body>
-        <h3>custom header</h3>
+        <form @submit.prevent="addTransaction">
+          <h2>Nova transação</h2>
+
+          <input
+            class="input-new-transaction"
+            type="text"
+            placeholder="Título"
+            v-model="title"
+          />
+
+          <input
+            class="input-new-transaction"
+            type="number"
+            placeholder="Título"
+            v-model="amount"
+          />
+
+          <input
+            class="input-new-transaction"
+            type="date"
+            placeholder="Título"
+            v-model="title"
+          />
+
+          <div class="buttons-container">
+            <button class="btn-new-transaction" @click="closeModal">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-new-transaction">Adicionar</button>
+          </div>
+        </form>
       </template>
       <template v-slot:footer>
         <h3>custom header</h3>
@@ -25,6 +55,8 @@ export default defineComponent({
   },
   setup() {
     const showModal = ref(true);
+    const title = ref("");
+    const amount = ref(0);
 
     function closeModal() {
       showModal.value = false;
@@ -34,10 +66,17 @@ export default defineComponent({
       showModal.value = true;
     }
 
+    function addTransaction() {
+      console.log("add transaction");
+    }
+
     return {
       showModal,
       closeModal,
       openModal,
+      addTransaction,
+      title,
+      amount,
     };
   },
 });
@@ -60,5 +99,11 @@ export default defineComponent({
   &:hover {
     filter: brightness(80%);
   }
+}
+
+.input-new-transaction {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
 </style>
