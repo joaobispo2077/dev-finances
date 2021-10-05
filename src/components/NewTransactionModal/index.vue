@@ -13,6 +13,7 @@
             type="text"
             placeholder="Título"
             v-model="title"
+            autofocus
           />
 
           <div>
@@ -41,7 +42,7 @@
         </form>
       </template>
       <template v-slot:footer>
-        <h3>custom header</h3>
+        <div></div>
       </template>
     </Modal>
   </transition>
@@ -126,11 +127,35 @@ export default defineComponent({
   color: var(--text-body);
 }
 
+.buttons-container {
+  display: flex;
+  flex: 1;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+}
 .btn-new-transaction {
-  .cancel {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0.15rem solid;
+  &.cancel {
+    border-color: var(--red);
+    color: var(--red);
   }
 
-  .save {
+  &.save {
+    border-color: var(--green-light);
+    background: var(--green-light);
+    color: var(--shape);
+  }
+
+  transition: filter 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(80%);
   }
 }
 </style>

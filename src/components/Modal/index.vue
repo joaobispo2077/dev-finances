@@ -71,14 +71,14 @@ export default defineComponent({
   z-index: 20;
   width: 100%;
   background: var(--background);
-  padding: 3rem;
+  padding: 1.5rem;
   position: relative;
   border-radius: 0.25rem;
   max-width: 32rem;
 
-  @media (min-width: 768px) {
+  @media (min-width: 567px) {
     max-width: 36rem;
-    padding: 3rem;
+    padding: 2rem;
   }
 }
 
@@ -89,7 +89,6 @@ export default defineComponent({
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
 }
 
 .modal-body {
