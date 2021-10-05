@@ -19,7 +19,15 @@ export const keyStore: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     isTransactionModalOpen: false,
-    transactions: [],
+    transactions: [
+      {
+        id: "String(key)",
+        title: `Lorem ipsum dolor sit amet consectetur`,
+        amount: Math.floor(Math.random() * 100),
+        createdAt: String(new Date()),
+        type: Math.floor(Math.random() * 2) === 0 ? "income" : "outcome",
+      },
+    ],
   },
   mutations: {
     showTransactionModal(state) {
@@ -30,10 +38,10 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    showTransactionModal({ state }, transaction: Transaction) {
+    async showTransactionModal({ state }, transaction: Transaction) {
       state.transactions.push(transaction);
     },
-    removeTransaction({ state }, id: string) {
+    async removeTransaction({ state }, id: string) {
       state.transactions = state.transactions.filter(
         (transaction) => transaction.id !== id
       );

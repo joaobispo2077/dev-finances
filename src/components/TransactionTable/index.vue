@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { keyStore } from "@/store";
-import { defineComponent, PropType } from "vue";
+import { defineComponent, computed, ComputedRef } from "vue";
 import { useStore } from "vuex";
 import TableRow, { Transaction } from "./TableRow.vue";
 
@@ -34,25 +34,13 @@ export default defineComponent({
   components: {
     TableRow,
   },
-  props: {
-    // transactions: {
-    //   type: Array as PropType<Transaction[]>,
-    //   required: true,
-    // },
-  },
-  setup(props) {
+  setup() {
     const { state, commit } = useStore(keyStore);
 
     const openModal = () => commit("showTransactionModal");
 
-    const transactions: Transaction[] = Object.keys(Array.from(Array(10))).map(
-      (key: string) => ({
-        id: String(key),
-        title: `Lorem ipsum dolor sit amet consectetur`,
-        amount: Math.floor(Math.random() * 100),
-        createdAt: String(new Date()),
-        type: Math.floor(Math.random() * 2) === 0 ? "income" : "outcome",
-      })
+    const transactions: ComputedRef<Transaction[]> = computed(
+      () => state.transactions
     );
 
     return { transactions, openModal };
