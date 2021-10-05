@@ -49,7 +49,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { keyStore } from "@/store";
+import { defineComponent, ref, computed } from "vue";
+import { useStore } from "vuex";
+
 import Modal from "../Modal/index.vue";
 
 export default defineComponent({
@@ -58,18 +61,14 @@ export default defineComponent({
     Modal,
   },
   setup() {
-    const showModal = ref(true);
+    const { state, commit } = useStore(keyStore);
+
+    const showModal = computed(() => state.isTransactionModalOpen);
+    const closeModal = () => commit("hideTransactionModal");
+
     const title = ref("");
     const amount = ref(0);
     const date = ref("");
-
-    function closeModal() {
-      showModal.value = false;
-    }
-
-    function openModal() {
-      showModal.value = true;
-    }
 
     function addTransaction() {
       console.log("add transaction");
@@ -78,7 +77,6 @@ export default defineComponent({
     return {
       showModal,
       closeModal,
-      openModal,
       addTransaction,
       title,
       amount,

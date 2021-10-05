@@ -1,6 +1,8 @@
 <template>
   <div class="table-container">
-    <button class="btn-new-transaction" type="button">+ Nova transação</button>
+    <button class="btn-new-transaction" type="button" @click="openModal">
+      + Nova transação
+    </button>
 
     <table class="transaction-table">
       <thead>
@@ -22,7 +24,9 @@
 </template>
 
 <script lang="ts">
+import { keyStore } from "@/store";
 import { defineComponent, PropType } from "vue";
+import { useStore } from "vuex";
 import TableRow, { Transaction } from "./TableRow.vue";
 
 export default defineComponent({
@@ -37,6 +41,10 @@ export default defineComponent({
     // },
   },
   setup(props) {
+    const { state, commit } = useStore(keyStore);
+
+    const openModal = () => commit("showTransactionModal");
+
     const transactions: Transaction[] = Object.keys(Array.from(Array(10))).map(
       (key: string) => ({
         id: String(key),
@@ -47,7 +55,7 @@ export default defineComponent({
       })
     );
 
-    return { transactions };
+    return { transactions, openModal };
   },
 });
 </script>
