@@ -4,8 +4,8 @@
     @click.self="$emit('close')"
     @keydown.esc="$emit('close')"
   >
-    <div class="modal-wrapper" @keydown.esc="$emit('close')">
-      <div class="modal-container" @keydown.esc="$emit('close')">
+    <div class="modal-wrapper">
+      <div class="modal-container">
         <div class="modal-header">
           <slot name="header"> default header </slot>
         </div>
@@ -28,10 +28,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, onBeforeUnmount } from "vue";
 
 export default defineComponent({
   name: "Modal",
+  methods: {},
+  setup(_, { emit }) {
+    function onEscapeKeyUp(event: KeyboardEvent) {
+      if (String(event.key).toLowerCase() === "escape") {
+        emit("close");
+      }
+    }
+
+    onMounted(() => {
+      window.removeEventListener("keypress", onEscapeKeyUp);
+    });
+
+    onBeforeUnmount(() => {
+      window.addEventListener("keypress", onEscapeKeyUp);
+    });
+  },
 });
 </script>
 
