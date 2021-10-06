@@ -5,7 +5,10 @@
         <button @click="closeModal" class="btn-modal-close">×</button>
       </template>
       <template v-slot:body>
-        <form class="form-new-transaction" @submit.prevent="addTransaction">
+        <form
+          class="form-new-transaction"
+          @submit.prevent="createNewTransaction"
+        >
           <h2>Nova transação</h2>
 
           <input
@@ -24,7 +27,7 @@
               v-model="amount"
             />
             <span class="amount-info"
-              >Use o sinal - (negativo) para despesas e. (vírgula para casas
+              >Use o sinal - (negativo) para despesas e (vírgula para casas
               decimais)</span
             >
           </div>
@@ -52,6 +55,7 @@
 import { keyStore } from "@/store";
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
+import { v4 as uuid } from "uuid";
 
 import Modal from "../Modal/index.vue";
 
@@ -61,7 +65,7 @@ export default defineComponent({
     Modal,
   },
   setup() {
-    const { state, commit } = useStore(keyStore);
+    const { state, commit, dispatch } = useStore(keyStore);
 
     const showModal = computed(() => state.isTransactionModalOpen);
     const closeModal = () => commit("hideTransactionModal");
@@ -70,17 +74,43 @@ export default defineComponent({
     const amount = ref(0);
     const date = ref("");
 
-    function addTransaction() {
-      console.log("add transaction");
+    async function cleanForm() {
+      title.value = "";
+      amount.value = 0;
+      date.value = "";
+    }
+
+    async function createNewTransaction() {
+      const hasValidTransaction =
+        !!title.value && !!amount.value && !!date.value;
+
+      if (!hasValidTransaction) {
+        return;
+      }
+
+      const type = amount.value < 0 ? "outcome" : "income";
+
+      const newTransaction = {
+        id: uuid(),
+        title: title.value,
+        amount: Number(amount.value),
+        createdAt: new Date(date.value).toISOString(),
+        type,
+      };
+
+      await dispatch("createTransaction", newTransaction);
+      cleanForm();
+      closeModal();
     }
 
     return {
+      cleanForm,
       showModal,
       closeModal,
-      addTransaction,
+      date,
       title,
       amount,
-      date,
+      createNewTransaction,
     };
   },
 });

@@ -38,7 +38,7 @@ export const store = createStore<State>({
     },
   },
   actions: {
-    async showTransactionModal({ state }, transaction: Transaction) {
+    async createTransaction({ state }, transaction: Transaction) {
       state.transactions.push(transaction);
     },
     async removeTransaction({ state }, id: string) {

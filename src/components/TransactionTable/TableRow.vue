@@ -30,7 +30,7 @@ export default defineComponent({
       props.transaction
     );
 
-    const amountPrefix = computed(() => (type === "income" ? "+" : "-"));
+    const amountPrefix = computed(() => (type === "income" ? "+" : ""));
     const amountFormatted = computed(() => formatCurrency(amount));
 
     const createdAtFormatted = computed(() => formatDate(createdAt));
