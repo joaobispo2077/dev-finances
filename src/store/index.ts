@@ -19,15 +19,32 @@ export const keyStore: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     isTransactionModalOpen: false,
-    transactions: [
-      {
-        id: "String(key)",
-        title: `Lorem ipsum dolor sit amet consectetur`,
-        amount: Math.floor(Math.random() * 100),
-        createdAt: String(new Date()),
-        type: Math.floor(Math.random() * 2) === 0 ? "income" : "outcome",
-      },
-    ],
+    transactions: [],
+  },
+  getters: {
+    summary: (state) => {
+      const { transactions } = state;
+
+      const income = transactions.reduce((acc, transaction) => {
+        if (transaction.type === "income") {
+          return acc + transaction.amount;
+        }
+        return acc;
+      }, 0);
+
+      const outcome = transactions.reduce((acc, transaction) => {
+        if (transaction.type === "outcome") {
+          return acc + transaction.amount;
+        }
+        return acc;
+      }, 0);
+
+      return {
+        income,
+        outcome,
+        balance: income + outcome,
+      };
+    },
   },
   mutations: {
     showTransactionModal(state) {
