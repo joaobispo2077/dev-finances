@@ -38,7 +38,11 @@
             <button class="btn-new-transaction cancel" @click="closeModal">
               Cancelar
             </button>
-            <button type="submit" class="btn-new-transaction save">
+            <button
+              type="submit"
+              class="btn-new-transaction save"
+              :disabled="!hasValidTransaction"
+            >
               Adicionar
             </button>
           </div>
@@ -74,6 +78,10 @@ export default defineComponent({
     const amount = ref(0);
     const date = ref("");
 
+    const hasValidTransaction = computed(
+      () => !!title.value && !!amount.value && !!date.value
+    );
+
     async function cleanForm() {
       title.value = "";
       amount.value = 0;
@@ -81,10 +89,7 @@ export default defineComponent({
     }
 
     async function createNewTransaction() {
-      const hasValidTransaction =
-        !!title.value && !!amount.value && !!date.value;
-
-      if (!hasValidTransaction) {
+      if (!hasValidTransaction.value) {
         return;
       }
 
@@ -104,13 +109,13 @@ export default defineComponent({
     }
 
     return {
-      cleanForm,
       showModal,
       closeModal,
       date,
       title,
       amount,
       createNewTransaction,
+      hasValidTransaction,
     };
   },
 });
