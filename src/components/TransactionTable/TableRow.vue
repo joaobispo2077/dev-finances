@@ -5,6 +5,9 @@
       {{ amountPrefix }}{{ amountFormatted }}
     </td>
     <td class="table-cell">{{ createdAtFormatted }}</td>
+    <td class="table-cell">
+      <button class="btn-remove"><img src="@/assets/minus.svg" /></button>
+    </td>
   </tr>
 </template>
 
@@ -61,5 +64,10 @@ export default defineComponent({
   &.outcome {
     color: var(--red);
   }
+}
+
+.btn-remove {
+  background: transparent;
+  border: 0;
 }
 </style>
