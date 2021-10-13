@@ -6,14 +6,18 @@
     </td>
     <td class="table-cell">{{ createdAtFormatted }}</td>
     <td class="table-cell">
-      <button class="btn-remove"><img src="@/assets/minus.svg" /></button>
+      <button class="btn-remove" @click="removeTransaction">
+        <img src="@/assets/minus.svg" />
+      </button>
     </td>
   </tr>
 </template>
 
 <script lang="ts">
+import { keyStore } from "@/store";
 import { formatCurrency, formatDate } from "@/utils/parser";
 import { defineComponent, computed, PropType, reactive } from "vue";
+import { useStore } from "vuex";
 
 export type Transaction = {
   id: string;
@@ -29,9 +33,15 @@ export default defineComponent({
     transaction: { type: Object as PropType<Transaction>, required: true },
   },
   setup(props) {
-    const { amount, createdAt, type } = reactive<Transaction>(
+    const { amount, createdAt, type, id } = reactive<Transaction>(
       props.transaction
     );
+
+    const { dispatch } = useStore(keyStore);
+
+    const removeTransaction = async () => {
+      await dispatch("removeTransaction", id);
+    };
 
     const amountPrefix = computed(() => (type === "income" ? "+" : ""));
     const amountFormatted = computed(() => formatCurrency(amount));
@@ -41,6 +51,7 @@ export default defineComponent({
     return {
       amountPrefix,
       amountFormatted,
+      removeTransaction,
       createdAtFormatted,
     };
   },
