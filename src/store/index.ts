@@ -19,7 +19,9 @@ export const keyStore: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     isTransactionModalOpen: false,
-    transactions: [],
+    transactions: JSON.parse(
+      localStorage.getItem("devfinances@transactions") || "[]"
+    ),
   },
   getters: {
     summary: (state) => {
@@ -57,10 +59,20 @@ export const store = createStore<State>({
   actions: {
     async createTransaction({ state }, transaction: Transaction) {
       state.transactions.push(transaction);
+
+      localStorage.setItem(
+        "devfinances@transactions",
+        JSON.stringify(state.transactions)
+      );
     },
     async removeTransaction({ state }, id: string) {
       state.transactions = state.transactions.filter(
         (transaction) => transaction.id !== id
+      );
+
+      localStorage.setItem(
+        "devfinances@transactions",
+        JSON.stringify(state.transactions)
       );
     },
   },
