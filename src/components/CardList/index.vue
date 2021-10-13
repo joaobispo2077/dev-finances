@@ -1,12 +1,60 @@
 <template>
   <ul class="container-list">
-    <li class="container-item">
+    <li
+      class="container-item"
+      v-motion
+      :initial="{
+        opacity: 0,
+        x: -900,
+      }"
+      :enter="{
+        opacity: 1,
+        x: 0,
+        transition: {
+          type: 'spring',
+          stiffness: 20,
+          delay: 300,
+        },
+      }"
+    >
       <Card title="Entradas" logo="income.svg" :amount="summary.income" />
     </li>
-    <li class="container-item">
+    <li
+      class="container-item"
+      v-motion
+      :initial="{
+        opacity: 0,
+        x: -900,
+      }"
+      :enter="{
+        opacity: 1,
+        x: 0,
+        transition: {
+          type: 'spring',
+          stiffness: 20,
+          delay: 120,
+        },
+      }"
+    >
       <Card title="Saídas" logo="outcome.svg" :amount="summary.outcome" />
     </li>
-    <li class="container-item">
+    <li
+      class="container-item"
+      v-motion
+      :initial="{
+        opacity: 0,
+        x: -900,
+      }"
+      :enter="{
+        opacity: 1,
+        x: 0,
+        transition: {
+          type: 'spring',
+          stiffness: 20,
+          delay: 50,
+        },
+      }"
+    >
       <Card
         title="Total"
         logo="total.svg"
