@@ -1,6 +1,18 @@
 <template>
   <div class="table-container">
-    <button class="btn-new-transaction" type="button" @click="openModal">
+    <button
+      class="btn-new-transaction"
+      type="button"
+      @click="openModal"
+      v-motion
+      :initial="{
+        scale: 0.25,
+      }"
+      :enter="{
+        scale: 1,
+      }"
+      :delay="100"
+    >
       + Nova transação
     </button>
 
