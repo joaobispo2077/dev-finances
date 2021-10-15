@@ -11,7 +11,6 @@
       :enter="{
         scale: 1,
       }"
-      :delay="100"
     >
       + Nova transação
     </button>
